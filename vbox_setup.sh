@@ -13,6 +13,7 @@ mkfs.ext4 /dev/sda3
 mount /dev/sda2 /mnt
 mkdir /mnt/home
 mount /dev/sda3 /mnt/home
+mount -a
 
 echo "Installing..."
 pacstrap -i /mnt base linux linux-firmware
