@@ -20,7 +20,7 @@ pacstrap -i /mnt base linux linux-firmware
 genfstab -U -p /mnt >> /mnt/etc/fstab
 cat << EOF > /mnt/root/in_chroot.sh
 passwd
-pacman -Syu grub efibootmgr dosfstools os-prober mtools linux-headers linux-lts linux-lts-headers neovim dhcpcd netctl
+pacman -Syu grub efibootmgr dosfstools os-prober mtools linux-headers linux-lts linux-lts-headers neovim dhcpcd netctl wpa_supplicant
 ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 echo "en_US ISO-8859-1" >> /etc/locale.gen
@@ -28,6 +28,13 @@ locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "arcticarch" >> /etc/hostname
 echo "127.0.1.1 articarch.localdomain arcticarch" >> /etc/hosts
+cat << EEG > /etc/netctl/start_eth_on_boot
+Description='A basic dhcp ethernet connection'
+Interface=enp0s3
+Connection=ethernet
+IP=dhcp
+EEG
+systemctl enable netctl-auto@enp0s3.service
 grub-install --target=i386-pc --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 fallocate -l 2G /swapfile
