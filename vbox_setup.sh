@@ -35,6 +35,7 @@ mkswap /swapfile
 echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
 exit
 EOF
+chmod 777 /mnt/root/in_chroot.sh
 arch-chroot /mnt /root/in_chroot.sh
 echo "Install complete. Rebooting in 5 seconds..."
 sleep 5
