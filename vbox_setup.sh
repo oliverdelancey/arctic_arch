@@ -13,12 +13,14 @@ mount /dev/sda2 /mnt
 mkdir /mnt/home
 mount /dev/sda3 /mnt/home
 
-pacstrap -i /mnt base
+pacstrap -i /mnt base linux linux-firmware
 genfstab -U -p /mnt >> /mnt/etc/fstab
+cat << EOF > /mnt/root/in_chroot.sh
 passwd
-pacman -S grub efibootmgr dosfstools os-prober mtools linux-headers linux-lts linux-lts-headers neovim
+pacman -S grub efibootmgr dosfstools os-prober mtools linux-headers linux-lts linux-lts-headers neovim dhcpcd netctl
 ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
-nvim /etc/locale.gen
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+echo "en_US ISO-8859-1" >> /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "arcticarch" >> /etc/hostname
@@ -30,4 +32,6 @@ chmod 600 /swapfile
 mkswap /swapfile
 echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
 exit
+EOF
+arch-chroot /mnt /root/in_chroot.sh
 reboot
