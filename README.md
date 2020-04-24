@@ -13,5 +13,5 @@ curl https://raw.githubusercontent.com/oliversandli/arctic_arch/master/vbox_setu
 ## Todo
 
 - [ ] Fix networking by installing `dhcpcd` when installing setup software.
-- [ ] Add `git` to `install_custom_packages.sh`.
+- [x] Add `git` to `install_custom_packages.sh`.
 - [ ] Create more general-purpose script with prompts.
