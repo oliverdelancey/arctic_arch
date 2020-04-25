@@ -5,9 +5,9 @@
 
 --------
 
-Quickly get `vbox_setup.sh`.
+Quickly get `vbox_setup-v2.sh`.
 ```bash
-curl https://raw.githubusercontent.com/oliversandli/arctic_arch/master/vbox_setup.sh > vbox_setup.sh
+curl https://raw.githubusercontent.com/oliversandli/arctic_arch/master/vbox_setup-v2.sh > vbox_setup-v2.sh
 ```
 
 ## Todo
