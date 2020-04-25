@@ -28,6 +28,9 @@ locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "arcticarch" >> /etc/hostname
 echo "127.0.1.1 articarch.localdomain arcticarch" >> /etc/hosts
+
+useradd -m penguin
+
 cat << EEG > /etc/netctl/start_eth_on_boot
 Description='A basic dhcp ethernet connection'
 Interface=enp0s3
@@ -35,6 +38,11 @@ Connection=ethernet
 IP=dhcp
 EEG
 systemctl enable netctl-auto@enp0s3.service
+
+pacman -Syu xorg xorg-xinit plasma-desktop sddm konsole dolphin firefox
+echo "exec startkde" > ~/.xinitrc
+systemctl enable sddm.service
+
 grub-install --target=i386-pc --recheck /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 fallocate -l 2G /swapfile
