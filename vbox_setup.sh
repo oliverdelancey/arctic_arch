@@ -30,6 +30,7 @@ echo "arcticarch" >> /etc/hostname
 echo "127.0.1.1 articarch.localdomain arcticarch" >> /etc/hosts
 
 useradd -m penguin
+passwd penguin
 
 cat << EEG > /etc/netctl/start_eth_on_boot
 Description='A basic dhcp ethernet connection'
