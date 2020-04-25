@@ -20,7 +20,7 @@ pacstrap -i /mnt base linux linux-firmware linux-headers
 genfstab -U -p /mnt >> /mnt/etc/fstab
 cat << EOF > /mnt/root/in_chroot.sh
 passwd
-pacman -Syu grub efibootmgr dosfstools os-prober mtools neovim dhcpcd sudo visudo
+pacman -Syu grub efibootmgr dosfstools os-prober mtools base-devel neovim dhcpcd sudo visudo
 ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 echo "en_US ISO-8859-1" >> /etc/locale.gen
