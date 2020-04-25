@@ -29,7 +29,7 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "arcticarch" >> /etc/hostname
 echo "127.0.1.1 articarch.localdomain arcticarch" >> /etc/hosts
 
-useradd -m penguin
+useradd -m -G wheel penguin
 passwd penguin
 
 cat << EEG > /etc/netctl/start_eth_on_boot
