@@ -32,8 +32,8 @@ echo "127.0.1.1 articarch.localdomain arcticarch" >> /etc/hosts
 useradd -m -G wheel penguin
 passwd penguin
 
-systemctl enable dhcpd@enp0s3.service
-systemctl start dchpd@enp0s3.service
+systemctl enable dhcpcd@enp0s3.service
+systemctl start dchpcd@enp0s3.service
 
 pacman -Syu xorg xorg-xinit plasma-desktop sddm konsole dolphin firefox
 echo "exec startkde" > ~/.xinitrc
