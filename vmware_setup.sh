@@ -35,10 +35,7 @@ passwd penguin
 systemctl enable dhcpcd.service
 systemctl start dchpcd.service
 
-pacman -Syu xorg xorg-xinit plasma-desktop sddm konsole dolphin firefox
-echo "exec startkde" > ~/.xinitrc
-systemctl enable sddm.service
-grub-install --target=i386-pc --recheck /dev/sda
+grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 fallocate -l 2G /swapfile
 chmod 600 /swapfile
