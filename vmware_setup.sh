@@ -4,16 +4,17 @@
 echo "Partitioning..."
 parted /dev/sda mklabel gpt
 mount -a
-parted --align minimal /dev/sda mkpart primary 0% 1MiB
+parted --align minimal /dev/sda mkpart primary fat32 0% 1MiB
 parted /dev/sda set 1 bios_grub on
-parted --align minimal /dev/sda mkpart primary 1MiB 25GiB
-parted --align minimal /dev/sda mkpart primary 25GiB 100%
+parted --align minimal /dev/sda mkpart primary ext4 1MiB 25GiB
+parted --align minimal /dev/sda mkpart primary ext4 25GiB 100%
 mkfs.ext4 /dev/sda2
 mkfs.ext4 /dev/sda3
 mount /dev/sda2 /mnt
 mkdir /mnt/home
 mount /dev/sda3 /mnt/home
 mount -a
+mkdir -p /mnt/boot/efi
 
 echo "Installing..."
 pacstrap -i /mnt base linux linux-firmware linux-headers
@@ -28,6 +29,7 @@ locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "arcticarch" >> /etc/hostname
 echo "127.0.1.1 articarch.localdomain arcticarch" >> /etc/hosts
+hwclock --systohc
 
 useradd -m -G wheel penguin
 passwd penguin
@@ -35,7 +37,7 @@ passwd penguin
 systemctl enable dhcpcd.service
 systemctl start dchpcd.service
 
-grub-install /dev/sda
+grub-install --bootloader-id=Arch_Linux --efi-directory=/boot/efi --recheck --target=x86_64-efi
 grub-mkconfig -o /boot/grub/grub.cfg
 fallocate -l 2G /swapfile
 chmod 600 /swapfile
