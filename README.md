@@ -10,6 +10,12 @@ Quickly get `vbox_setup-v2.sh`.
 curl https://raw.githubusercontent.com/oliversandli/arctic_arch/master/vbox_setup-v2.sh > vbox_setup-v2.sh
 ```
 
+## VMware
+
+```bash
+curl https://git.io/JJFvx > vmware_setup.sh
+```
+
 ## Todo
 
 - [ ] Iron out `sudo` difficulties. See [https://wiki.archlinux.org/index.php/Sudo#Configuration] for tips.
