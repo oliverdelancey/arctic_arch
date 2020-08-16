@@ -4,20 +4,22 @@
 echo "Partitioning..."
 parted /dev/sda mklabel gpt
 mount -a
-parted --align minimal /dev/sda mkpart primary fat32 0% 1MiB
-parted /dev/sda set 1 bios_grub on
-parted --align minimal /dev/sda mkpart primary ext4 1MiB 25GiB
-parted --align minimal /dev/sda mkpart primary ext4 25GiB 100%
+parted --align minimal /dev/sda mkpart primary fat32 0% 260MiB
+parted /dev/sda set 1 esp on
+parted --align minimal /dev/sda mkpart primary ext4 260MiB 20GiB
+parted --align minimal /dev/sda mkpart primary ext4 20GiB 100%
+mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/sda2
 mkfs.ext4 /dev/sda3
-mount /dev/sda2 /mnt
+mkdir -p /mnt/boot/efi
 mkdir /mnt/home
+mount /dev/sda1 /mnt/boot/efi
+mount /dev/sda2 /mnt
 mount /dev/sda3 /mnt/home
 mount -a
-mkdir -p /mnt/boot/efi
 
 echo "Installing..."
-pacstrap -i /mnt base linux linux-firmware linux-headers
+pacstrap /mnt base linux linux-firmware linux-headers
 genfstab -U -p /mnt >> /mnt/etc/fstab
 cat << EOF > /mnt/root/in_chroot.sh
 passwd
