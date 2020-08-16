@@ -13,7 +13,7 @@ curl https://raw.githubusercontent.com/oliversandli/arctic_arch/master/vbox_setu
 ## VMware
 
 ```bash
-curl https://git.io/JJFvx > vmware_setup.sh
+curl -L https://git.io/JJFvx > vmware_setup.sh
 ```
 
 ## Todo
