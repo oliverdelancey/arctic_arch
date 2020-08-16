@@ -11,11 +11,12 @@ parted --align minimal /dev/sda mkpart primary ext4 20GiB 100%
 mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/sda2
 mkfs.ext4 /dev/sda3
-mkdir -p /mnt/boot/efi
-mkdir /mnt/home
-mount /dev/sda1 /mnt/boot/efi
+
 mount /dev/sda2 /mnt
+mkdir /mnt/home
 mount /dev/sda3 /mnt/home
+mkdir -p /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
 mount -a
 
 echo "Installing..."
