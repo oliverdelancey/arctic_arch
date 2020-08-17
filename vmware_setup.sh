@@ -109,12 +109,12 @@ cat << EOF
 %%%   +--------------------------------------------------------+   %%%
 %%%   |                                                        |   %%%
 %%%   |   Install COMPLETE. Rebooting in 5 (five) seconds...   |   %%%
+%%%   |               (Press CTRL-C to CANCEL)                 |   %%%
 %%%   |                                                        |   %%%
 %%%   +--------------------------------------------------------+   %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ***** END INSTALL SCRIPT MESSAGE *****
 EOF
-echo "Install complete. Rebooting in 5 seconds..."
 sleep 5
 reboot
