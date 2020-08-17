@@ -1,7 +1,19 @@
 #!/bin/bash
 
 # gpt things
-echo "Partitioning..."
+cat << EOF
+***** BEGIN INSTALL SCRIPT MESSAGE *****
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   +---------------------+   %%%
+%%%   |                     |   %%%
+%%%   |   Partitioning...   |   %%%
+%%%   |                     |   %%%
+%%%   +---------------------+   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+***** END INSTALL SCRIPT MESSAGE *****
+EOF
 parted /dev/sda mklabel gpt
 mount -a
 parted --align minimal /dev/sda mkpart primary fat32 0% 260MiB
@@ -12,6 +24,19 @@ mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/sda2
 mkfs.ext4 /dev/sda3
 
+cat << EOF
+***** BEGIN INSTALL SCRIPT MESSAGE *****
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   +---------------------+   %%%
+%%%   |                     |   %%%
+%%%   |   Mounting...       |   %%%
+%%%   |                     |   %%%
+%%%   +---------------------+   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+***** END INSTALL SCRIPT MESSAGE *****
+EOF
 mount /dev/sda2 /mnt
 mkdir /mnt/home
 mount /dev/sda3 /mnt/home
@@ -19,9 +44,35 @@ mkdir -p /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
 mount -a
 
-echo "Installing..."
+cat << EOF
+***** BEGIN INSTALL SCRIPT MESSAGE *****
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   +---------------------+   %%%
+%%%   |                     |   %%%
+%%%   |   Installing...     |   %%%
+%%%   |                     |   %%%
+%%%   +---------------------+   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+***** END INSTALL SCRIPT MESSAGE *****
+EOF
 pacstrap /mnt base linux linux-firmware linux-headers
 genfstab -U -p /mnt >> /mnt/etc/fstab
+
+cat << EOF
+***** BEGIN INSTALL SCRIPT MESSAGE *****
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   +---------------------------+   %%%
+%%%   |                           |   %%%
+%%%   |   Configuring System...   |   %%%
+%%%   |                           |   %%%
+%%%   +---------------------------+   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+***** END INSTALL SCRIPT MESSAGE *****
+EOF
 cat << EOF > /mnt/root/in_chroot.sh
 passwd
 pacman -Syu grub efibootmgr dosfstools os-prober mtools base-devel neovim dhcpcd sudo
@@ -51,6 +102,19 @@ EOF
 chmod 777 /mnt/root/in_chroot.sh
 arch-chroot /mnt /root/in_chroot.sh
 umount -R /mnt
+cat << EOF
+***** BEGIN INSTALL SCRIPT MESSAGE *****
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   +--------------------------------------------------------+   %%%
+%%%   |                                                        |   %%%
+%%%   |   Install COMPLETE. Rebooting in 5 (five) seconds...   |   %%%
+%%%   |                                                        |   %%%
+%%%   +--------------------------------------------------------+   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+***** END INSTALL SCRIPT MESSAGE *****
+EOF
 echo "Install complete. Rebooting in 5 seconds..."
 sleep 5
 reboot
