@@ -8,7 +8,7 @@ firmware="efi"
 3. Boot with the latest Arch iso.
 4. Download the automation script.
 ```bash
-curl -L https://git.io/JJFvx > vmware_setup.sh
+curl -L https://git.io/JkHxl > vmware_setup.sh
 ```
 5. Give it full permissions, and run.
 ```bash
