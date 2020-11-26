@@ -12,9 +12,7 @@ curl https://raw.githubusercontent.com/oliversandli/arctic_arch/master/vbox_setu
 
 ## VMware
 
-```bash
-curl -L https://git.io/JJFvx > vmware_setup.sh
-```
+See [VMware.md](vmware/VMware.md)
 
 ## Todo
 
