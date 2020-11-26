@@ -74,6 +74,7 @@ cat << EOF
 ***** END INSTALL SCRIPT MESSAGE *****
 EOF
 cat << EOF > /mnt/root/in_chroot.sh
+echo "Enter password for root."
 passwd
 pacman -Syu grub efibootmgr dosfstools os-prober mtools base-devel neovim dhcpcd sudo
 ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
@@ -86,6 +87,7 @@ echo "127.0.1.1 articarch.localdomain arcticarch" >> /etc/hosts
 hwclock --systohc
 
 useradd -m -G wheel penguin
+echo "Enter password for user."
 passwd penguin
 
 systemctl enable dhcpcd.service
