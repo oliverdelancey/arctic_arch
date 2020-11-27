@@ -4,7 +4,7 @@
 2. Boot with the latest Arch iso.
 3. Download the install script.
 ```bash
-curl -L https://git.io/JkdG5 > vbxset.sh
+curl -L https://git.io/JkdZL > vbxset.sh
 ```
 4. Give script `777` privileges and run.
 ```bash
