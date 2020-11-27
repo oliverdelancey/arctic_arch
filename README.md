@@ -5,10 +5,9 @@
 
 --------
 
-Quickly get `vbox_setup-v2.sh`.
-```bash
-curl https://raw.githubusercontent.com/oliversandli/arctic_arch/master/vbox_setup-v2.sh > vbox_setup-v2.sh
-```
+## VirtualBox
+
+See [VirtualBox.md](virtualbox/VirtualBox.md)
 
 ## VMware
 
